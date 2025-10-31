@@ -1,0 +1,22 @@
+# DeveloperAI – Changelog
+
+## v1.0.0 – 2025-10-30
+- Commit: 142d731 – Version 1.0.0
+
+## v1.0.1 – 2025-10-30
+- Commit: 4395f6d – Version 1.0.1
+
+## v1.0.2 – 2025-10-30
+- Commit: eae5b34 – Version 1.0.2
+
+## v1.0.3 – 2025-10-30
+- Commit: fbf57aa – Version 1.0.3
+
+## v1.0.4 – 2025-10-30
+- Commit: b202d70 – Version 1.0.4
+
+## v1.0.5 – 2025-10-30
+- Commit: 754ae6a – Version 1.0.5
+
+## v1.0.6 – 2025-10-30
+- Commit: 33e86e4 – Version 1.0.6

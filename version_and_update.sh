@@ -50,7 +50,7 @@ echo "Purpose: Automated evolution based on folder changes." >> Docs/Manifesto.t
 git add .
 git commit -m "Version $new_version"
 git tag -a "v$new_version" -m "Release version $new_version"
-git push origin master
+git push origin main
 git push origin "v$new_version"
 
 echo "✅ Version $new_version pushed and documentation updated."

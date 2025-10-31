@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const theme = savedTheme || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      });
+    </script>
+
+    <meta charset="UTF-8" />
+    <title>DeveloperAI Web Interface</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="theme-toggle">
+        <button onclick="toggleTheme()">🌓 Alternar tema</button>
+      </div>
+
+      <div class="logout">
+        <form action="/logout" method="get">
+          <button type="submit">🔓 Logout</button>
+        </form>
+      </div>
+
+      <header>
+        <h1>🧠 DeveloperAI Control Panel</h1>
+        <p class="subtitle">Manage your AI project visually and efficiently</p>
+      </header>
+
+      <section class="status-card">
+        <h2>📊 Project Status</h2>
+        <ul>
+          <li><strong>Version:</strong> {{ status.version }}</li>
+          <li><strong>Branch:</strong> {{ status.branch }}</li>
+          <li><strong>Last Commit:</strong> {{ status.commit }}</li>
+        </ul>
+      </section>
+
+      <section class="command-card">
+        <h2>⚙️ Run Command</h2>
+        <form method="POST">
+          <select name="command">
+            {% for cmd in commands %}
+            <option value="{{ cmd }}">{{ cmd }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit">Execute</button>
+        </form>
+      </section>
+
+      <section class="output-card">
+        <h2>📤 Output</h2>
+        <pre>{{ output }}</pre>
+      </section>
+
+      <section class="history-card">
+        <h2>📜 Command History</h2>
+        <pre id="log-area">Loading logs...</pre>
+      </section>
+    </div>
+
+    <script>
+      function fetchLogs() {
+        fetch("/logs")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("log-area").textContent = data;
+          });
+      }
+      setInterval(fetchLogs, 2000);
+      fetchLogs();
+    </script>
+
+    <script>
+      function toggleTheme() {
+        const current = document.documentElement.getAttribute("data-theme");
+        const next = current === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin – Adicionar Usuário</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>👤 Adicionar novo usuário</h1>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Nome de usuário" required>
+            <input type="password" name="password" id="password" placeholder="Senha" required minlength="6">
+            <small>⚠️ Mínimo 6 caracteres. Permitidos: letras, números, ! @ # $ % ^ & * ( )</small>
+            <div id="strength"></div>
+            <button type="submit">Criar usuário</button>
+        </form>
+        {% if message %}
+        <p class="message">{{ message }}</p>
+        {% endif %}
+    </div>
+
+    <script>
+    document.getElementById("password").addEventListener("input", function () {
+        const val = this.value;
+        const strength = document.getElementById("strength");
+        let score = 0;
+
+        if (val.length >= 6) score++;
+        if (/[A-Z]/.test(val)) score++;
+        if (/[0-9]/.test(val)) score++;
+        if (/[^A-Za-z0-9]/.test(val)) score++;
+
+        const levels = ["Muito fraca", "Fraca", "Média", "Forte", "Muito forte"];
+        strength.textContent = "🔒 Força da senha: " + levels[score];
+    });
+    </script>
+</body>
+</html>

@@ -14,3 +14,6 @@ git tag -a "v$version" -m "Release version $version"
 # Envia para o GitHub
 git push origin main
 git push origin "v$version"
+
+# Atualiza a versão
+echo "1.0.0" > version.txt
